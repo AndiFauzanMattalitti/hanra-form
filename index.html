@@ -525,6 +525,78 @@
 
     .error-msg.visible { display: block; }
 
+    /* ===== ACCORDION ===== */
+    .accordion-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #1A1A1A;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 14px 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .accordion-btn:hover { background: #222; border-color: var(--emas); }
+    .accordion-btn.active { border-color: var(--emas); background: #1E1A10; }
+    .accordion-icon-wrap {
+      width: 36px; height: 36px;
+      background: var(--merah);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .accordion-title {
+      flex: 1;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--putih-soft);
+      letter-spacing: 0.02em;
+    }
+    .accordion-chevron {
+      font-size: 1.3rem;
+      color: var(--emas);
+      transition: transform 0.3s;
+      font-weight: 400;
+      line-height: 1;
+    }
+    .accordion-chevron.open { transform: rotate(90deg); }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .accordion-content {
+      background: #111;
+      border: 1px solid #2A2A2A;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      padding: 16px 18px;
+      font-size: 0.8rem;
+      color: #BBBBBB;
+      line-height: 1.75;
+    }
+    .accordion-content p { margin: 6px 0; }
+    .accordion-content ol { padding-left: 20px; margin: 6px 0 10px; }
+    .accordion-content ol li { margin-bottom: 4px; }
+    .acc-section-title {
+      color: var(--emas);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      margin-top: 14px !important;
+      margin-bottom: 4px !important;
+    }
+    .acc-pasal {
+      color: var(--putih-soft);
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-top: 10px !important;
+    }
+
     /* ===== TOMBOL SELENGKAPNYA ===== */
     .btn-selengkapnya {
       background: none;
@@ -728,15 +800,227 @@
 
     <!-- PERNYATAAN -->
     <div class="pernyataan-box">
-      <p>Data yang Saudara isi digunakan untuk keperluan pendataan keanggotaan HANRA dan dilindungi sesuai <strong>UU PDP No. 27/2022</strong>. <button type="button" class="btn-selengkapnya-inline" onclick="togglePernyataan()">Selengkapnya ▾</button></p>
-      <div class="pernyataan-detail" id="pernyataanDetail" style="display:none;">
-        <p style="margin-top:8px;font-size:0.82rem;color:#BBBBBB;">HANRA – Pertahanan Rakyat selaku Pengendali Data Pribadi memproses data semata-mata untuk pendataan keanggotaan, pengelolaan administrasi, dan pelaksanaan kegiatan organisasi. Data tidak dialihkan kepada pihak ketiga tanpa persetujuan Saudara. Saudara berhak mengakses, memperbaiki, atau meminta penghapusan data sewaktu-waktu.</p>
+
+      <!-- ACCORDION 1: KETENTUAN KEANGGOTAAN -->
+      <button type="button" class="accordion-btn" onclick="toggleAccordion('acc1')">
+        <span class="accordion-icon-wrap"><span class="accordion-icon">📄</span></span>
+        <span class="accordion-title">Ketentuan dan Peraturan Keanggotaan</span>
+        <span class="accordion-chevron" id="chev1">›</span>
+      </button>
+      <div class="accordion-body" id="acc1">
+        <div class="accordion-content">
+
+          <p class="acc-section-title">I. KETENTUAN UMUM</p>
+          <p class="acc-pasal">Pasal 1 — Kedudukan dan Tujuan</p>
+          <ol>
+            <li>HANRA — Pertahanan Rakyat merupakan wadah partisipasi masyarakat yang berorientasi pada penguatan kesadaran kebangsaan, persatuan nasional, ketahanan masyarakat, dan pengabdian kepada Negara Kesatuan Republik Indonesia.</li>
+            <li>HANRA berlandaskan Pancasila dan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 serta menjunjung tinggi prinsip Bhinneka Tunggal Ika.</li>
+            <li>Seluruh kegiatan HANRA dilaksanakan berdasarkan ketentuan hukum dan peraturan perundang-undangan Republik Indonesia.</li>
+            <li>HANRA tidak berkedudukan sebagai institusi militer, kepolisian, ataupun lembaga negara yang memiliki kewenangan penegakan hukum.</li>
+          </ol>
+
+          <p class="acc-section-title">II. PERSYARATAN KEANGGOTAAN</p>
+          <p class="acc-pasal">Pasal 2 — Calon Anggota</p>
+          <ol>
+            <li>Warga Negara Indonesia yang bersedia menjunjung tinggi Pancasila dan UUD 1945 dapat mengajukan permohonan menjadi anggota HANRA.</li>
+            <li>Pendaftaran dilakukan secara sukarela, atas kesadaran pribadi, tanpa paksaan atau tekanan dari pihak mana pun.</li>
+            <li>Calon anggota wajib memberikan identitas dan informasi yang benar serta dapat dipertanggungjawabkan.</li>
+            <li>Calon anggota bersedia mengikuti proses pendataan, verifikasi, dan tahapan penerimaan yang ditetapkan organisasi.</li>
+            <li>Pengisian formulir pendaftaran tidak secara otomatis memberikan status keanggotaan resmi.</li>
+          </ol>
+          <p class="acc-pasal">Pasal 3 — Penetapan Keanggotaan</p>
+          <ol>
+            <li>Status keanggotaan ditetapkan setelah calon anggota memenuhi persyaratan dan dinyatakan diterima oleh pengurus yang berwenang.</li>
+            <li>Organisasi berhak meminta klarifikasi atau kelengkapan informasi yang relevan dengan proses pendaftaran.</li>
+            <li>Keputusan penerimaan atau penolakan keanggotaan harus didasarkan pada pertimbangan yang objektif, tidak diskriminatif, dan sesuai ketentuan organisasi.</li>
+          </ol>
+
+          <p class="acc-section-title">III. HAK DAN KEWAJIBAN ANGGOTA</p>
+          <p class="acc-pasal">Pasal 4 — Hak Anggota</p>
+          <p>Setiap anggota HANRA berhak untuk:</p>
+          <ol>
+            <li>Memperoleh informasi mengenai tujuan, program, dan kegiatan organisasi.</li>
+            <li>Mengikuti kegiatan organisasi sesuai ketentuan yang berlaku.</li>
+            <li>Menyampaikan pendapat, usulan, dan kritik secara bertanggung jawab.</li>
+            <li>Mendapatkan perlakuan yang adil dan penghormatan terhadap martabat pribadi.</li>
+            <li>Memperoleh perlindungan atas data pribadi sesuai peraturan perundang-undangan.</li>
+            <li>Mengundurkan diri dari keanggotaan melalui mekanisme yang ditetapkan organisasi.</li>
+          </ol>
+          <p class="acc-pasal">Pasal 5 — Kewajiban Anggota</p>
+          <p>Setiap anggota HANRA berkewajiban untuk:</p>
+          <ol>
+            <li>Menjunjung tinggi Pancasila, UUD 1945, dan kedaulatan Negara Kesatuan Republik Indonesia.</li>
+            <li>Memelihara persatuan nasional dan menghormati keberagaman masyarakat Indonesia.</li>
+            <li>Menjaga kehormatan, nama baik, dan kredibilitas organisasi.</li>
+            <li>Mematuhi peraturan organisasi dan keputusan pengurus yang sah sepanjang sesuai dengan hukum.</li>
+            <li>Menjunjung tinggi kedisiplinan, tanggung jawab, kejujuran, dan solidaritas.</li>
+            <li>Menghormati hak asasi manusia serta menjaga ketertiban dan keselamatan masyarakat.</li>
+            <li>Menggunakan identitas dan atribut organisasi secara bertanggung jawab.</li>
+          </ol>
+
+          <p class="acc-section-title">IV. DISIPLIN DAN LARANGAN</p>
+          <p class="acc-pasal">Pasal 6 — Kode Etik</p>
+          <ol>
+            <li>Setiap anggota wajib menjaga sikap dan perilaku yang mencerminkan tanggung jawab kebangsaan.</li>
+            <li>Setiap anggota wajib menghormati sesama anggota dan masyarakat tanpa membedakan suku, agama, ras, golongan, maupun pandangan politik.</li>
+            <li>Setiap anggota dilarang melakukan tindakan yang merugikan masyarakat atau mencemarkan nama baik organisasi.</li>
+          </ol>
+          <p class="acc-pasal">Pasal 7 — Larangan</p>
+          <p>Anggota HANRA dilarang:</p>
+          <ol>
+            <li>Menggunakan nama atau atribut organisasi untuk melakukan intimidasi, pemaksaan, kekerasan, maupun tindakan melawan hukum.</li>
+            <li>Melakukan tindakan main hakim sendiri atau mengambil alih kewenangan aparat penegak hukum.</li>
+            <li>Membawa, menggunakan, atau menguasai senjata secara melawan hukum dengan mengatasnamakan organisasi.</li>
+            <li>Melakukan pungutan, penggalangan dana, atau kegiatan komersial atas nama HANRA tanpa kewenangan yang sah.</li>
+            <li>Menyebarkan informasi palsu, ujaran kebencian, atau melakukan provokasi yang mengancam ketertiban masyarakat.</li>
+            <li>Menggunakan organisasi untuk kepentingan pribadi yang bertentangan dengan tujuan dan peraturan HANRA.</li>
+            <li>Mengatasnamakan HANRA dalam kegiatan politik praktis tanpa keputusan resmi organisasi dan tanpa memperhatikan ketentuan hukum yang berlaku.</li>
+          </ol>
+
+          <p class="acc-section-title">V. KEGIATAN ORGANISASI</p>
+          <p class="acc-pasal">Pasal 8 — Partisipasi dan Pengabdian</p>
+          <ol>
+            <li>Anggota dapat mengikuti kegiatan pendidikan kebangsaan, penguatan ketahanan masyarakat, kegiatan sosial, kemanusiaan, dan pengabdian kepada masyarakat.</li>
+            <li>Pelaksanaan kegiatan wajib memperhatikan keselamatan peserta, kepentingan masyarakat, dan ketentuan hukum.</li>
+            <li>Kegiatan yang memerlukan izin, sertifikasi, atau kewenangan khusus hanya dapat dilaksanakan setelah persyaratan hukum dipenuhi.</li>
+            <li>Keanggotaan HANRA tidak memberikan status sebagai anggota TNI, Polri, komponen cadangan, ataupun kewenangan pertahanan negara yang secara hukum memerlukan penetapan khusus.</li>
+          </ol>
+
+          <p class="acc-section-title">VI. PENEGAKAN DISIPLIN ORGANISASI</p>
+          <p class="acc-pasal">Pasal 9 — Pelanggaran dan Sanksi</p>
+          <ol>
+            <li>Anggota yang melanggar peraturan organisasi dapat dikenai tindakan pembinaan atau sanksi organisasi.</li>
+            <li>Sanksi dapat berupa teguran, peringatan tertulis, pembekuan keanggotaan, atau pemberhentian.</li>
+            <li>Penjatuhan sanksi harus dilakukan secara proporsional, berdasarkan fakta, dan memberikan kesempatan kepada anggota untuk menyampaikan klarifikasi atau pembelaan.</li>
+            <li>Pelanggaran hukum yang dilakukan anggota menjadi tanggung jawab pelaku sesuai ketentuan peraturan perundang-undangan.</li>
+          </ol>
+
+          <p class="acc-section-title">VII. BERAKHIRNYA KEANGGOTAAN</p>
+          <p class="acc-pasal">Pasal 10 — Pengakhiran Keanggotaan</p>
+          <p>Keanggotaan HANRA berakhir apabila anggota:</p>
+          <ol>
+            <li>Mengundurkan diri secara sukarela.</li>
+            <li>Meninggal dunia.</li>
+            <li>Diberhentikan berdasarkan keputusan organisasi sesuai prosedur yang berlaku.</li>
+            <li>Tidak lagi memenuhi persyaratan keanggotaan yang sah.</li>
+          </ol>
+
+          <p class="acc-section-title">VIII. KETENTUAN PENUTUP</p>
+          <p class="acc-pasal">Pasal 11 — Persetujuan dan Keberlakuan</p>
+          <ol>
+            <li>Calon anggota wajib membaca dan memahami ketentuan ini sebelum menyampaikan persetujuan pendaftaran.</li>
+            <li>Persetujuan diberikan secara sadar dan sukarela melalui kotak persetujuan pada formulir pendaftaran.</li>
+            <li>Ketentuan ini menjadi dasar awal hubungan keanggotaan dan akan dilaksanakan selaras dengan Anggaran Dasar, Anggaran Rumah Tangga, serta peraturan organisasi yang berlaku.</li>
+            <li>Perubahan ketentuan yang memengaruhi hak atau kewajiban anggota akan diberitahukan melalui saluran komunikasi resmi organisasi.</li>
+          </ol>
+
+        </div>
       </div>
-      <div class="checkbox-row">
-        <input type="checkbox" id="persetujuan" required>
-        <label for="persetujuan">Data yang saya isi benar dan saya setuju atas pemrosesan data pribadi saya.</label>
+
+      <!-- ACCORDION 2: KEBIJAKAN PRIVASI -->
+      <button type="button" class="accordion-btn" onclick="toggleAccordion('acc2')" style="margin-top:10px;">
+        <span class="accordion-icon-wrap"><span class="accordion-icon">🛡</span></span>
+        <span class="accordion-title">Kebijakan Privasi &amp; Pelindungan Data Pribadi</span>
+        <span class="accordion-chevron" id="chev2">›</span>
+      </button>
+      <div class="accordion-body" id="acc2">
+        <div class="accordion-content">
+
+          <p class="acc-pasal">Pasal 1 — Ketentuan Umum</p>
+          <p>HANRA — Pertahanan Rakyat berkomitmen menghormati privasi dan melindungi data pribadi setiap calon anggota maupun anggota organisasi. Pengumpulan, penggunaan, penyimpanan, dan pengelolaan data pribadi dilaksanakan berdasarkan prinsip keabsahan, transparansi, keamanan, serta pertanggungjawaban sesuai Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP).</p>
+
+          <p class="acc-pasal">Pasal 2 — Pengendali Data Pribadi</p>
+          <p>Pengendali Data Pribadi dalam proses pendaftaran ini adalah HANRA — Pertahanan Rakyat selaku organisasi kemasyarakatan yang bertanggung jawab menentukan tujuan dan melakukan pengendalian atas pemrosesan data pribadi sesuai ketentuan UU PDP.</p>
+
+          <p class="acc-pasal">Pasal 3 — Jenis Data yang Dikumpulkan</p>
+          <p>HANRA mengumpulkan data pribadi yang diperlukan untuk proses pendaftaran dan administrasi keanggotaan, meliputi:</p>
+          <ol>
+            <li>Nama lengkap.</li>
+            <li>Tempat dan tanggal lahir.</li>
+            <li>Jenis kelamin dan usia.</li>
+            <li>Alamat domisili, kabupaten/kota, dan provinsi.</li>
+            <li>Pendidikan terakhir.</li>
+            <li>Pekerjaan atau aktivitas.</li>
+            <li>Nomor WhatsApp aktif.</li>
+            <li>Foto profil apabila diminta dalam formulir.</li>
+          </ol>
+          <p>Sistem juga dapat mencatat waktu pendaftaran, status persetujuan, dan informasi teknis yang diperlukan untuk keamanan serta pengoperasian website, sebagaimana telah diberitahukan kepada pengguna. HANRA membatasi pengumpulan data sesuai prinsip minimalisasi data sebagaimana diatur dalam UU PDP.</p>
+
+          <p class="acc-pasal">Pasal 4 — Tujuan Pemrosesan Data</p>
+          <p>Data pribadi digunakan secara terbatas untuk:</p>
+          <ol>
+            <li>Melaksanakan pendataan dan verifikasi calon anggota.</li>
+            <li>Mengelola administrasi serta status keanggotaan.</li>
+            <li>Menyampaikan informasi dan komunikasi resmi organisasi.</li>
+            <li>Melaksanakan koordinasi kegiatan yang berkaitan dengan keanggotaan.</li>
+            <li>Menjaga keamanan sistem pendaftaran dan mencegah penyalahgunaan data.</li>
+            <li>Memenuhi kewajiban hukum yang berlaku.</li>
+          </ol>
+          <p>Penggunaan data untuk tujuan baru yang memerlukan persetujuan akan dilakukan setelah calon anggota atau anggota memperoleh informasi yang memadai dan memberikan persetujuan yang sah.</p>
+
+          <p class="acc-pasal">Pasal 5 — Dasar Pemrosesan dan Persetujuan</p>
+          <p>Pemrosesan data pribadi untuk pendaftaran didasarkan pada persetujuan yang sah, spesifik, dan diberikan secara sadar oleh calon anggota sebagaimana diatur dalam Pasal 20 UU PDP. Persetujuan diberikan melalui kotak persetujuan pada formulir elektronik yang tidak dicentang secara otomatis. Untuk kegiatan pemrosesan tertentu, HANRA dapat menggunakan dasar pemrosesan lain yang diakui dalam UU PDP apabila persyaratannya terpenuhi.</p>
+
+          <p class="acc-pasal">Pasal 6 — Penyimpanan dan Jangka Waktu Retensi</p>
+          <p>Data pribadi disimpan selama diperlukan untuk proses pendaftaran, pengelolaan keanggotaan, dan pemenuhan kewajiban hukum. Jangka waktu penyimpanan ditetapkan sebagai berikut:</p>
+          <ol>
+            <li>Data pendaftar yang tidak diterima atau membatalkan pendaftaran — disimpan paling lama 1 (satu) tahun sejak proses pendaftaran berakhir, kecuali terdapat kebutuhan hukum lain.</li>
+            <li>Data anggota aktif — selama keanggotaan berlangsung.</li>
+            <li>Data anggota yang telah berhenti — disimpan paling lama 2 (dua) tahun sejak berakhirnya keanggotaan untuk keperluan administrasi dan pembuktian.</li>
+            <li>Catatan persetujuan — disimpan sesuai kebutuhan pembuktian dan ketentuan hukum yang berlaku.</li>
+          </ol>
+          <p>Setelah masa retensi berakhir, data dihapus atau dimusnahkan secara aman sesuai prinsip penghapusan data dalam UU PDP.</p>
+
+          <p class="acc-pasal">Pasal 7 — Keamanan dan Kerahasiaan Data</p>
+          <p>HANRA menerapkan langkah pengamanan yang memadai untuk mencegah akses tanpa izin, kebocoran, kehilangan, perubahan, maupun penyalahgunaan data pribadi sebagaimana diamanatkan dalam UU PDP. Akses terhadap data dibatasi kepada pengurus atau petugas yang memiliki kewenangan dan kebutuhan kerja yang sah, serta diwajibkan menjaga kerahasiaan informasi.</p>
+
+          <p class="acc-pasal">Pasal 8 — Pengungkapan kepada Pihak Ketiga</p>
+          <p>HANRA tidak menjual atau memperdagangkan data pribadi calon anggota maupun anggota. Data dapat diproses melalui penyedia layanan teknologi seperti penyedia hosting atau sistem komunikasi apabila diperlukan untuk menjalankan layanan pendaftaran, dengan pengamanan yang sesuai ketentuan hukum. Pengungkapan data kepada pihak lain hanya dilakukan berdasarkan dasar hukum yang sah sesuai UU PDP. Apabila terdapat transfer data ke luar wilayah Indonesia, HANRA wajib memenuhi persyaratan transfer data lintas negara sebagaimana diatur dalam Pasal 56 UU PDP.</p>
+
+          <p class="acc-pasal">Pasal 9 — Hak Pemilik Data Pribadi</p>
+          <p>Setiap calon anggota dan anggota memiliki hak sesuai Pasal 5–16 UU PDP untuk:</p>
+          <ol>
+            <li>Memperoleh informasi mengenai penggunaan dan pengelolaan data pribadinya.</li>
+            <li>Mengakses serta memperoleh salinan data pribadi.</li>
+            <li>Melengkapi, memperbarui, dan memperbaiki data yang tidak akurat.</li>
+            <li>Menarik kembali persetujuan pemrosesan data pribadi.</li>
+            <li>Meminta penghapusan atau pemusnahan data sesuai ketentuan hukum.</li>
+            <li>Mengajukan keberatan atau menggunakan hak lain yang dijamin peraturan perundang-undangan.</li>
+          </ol>
+          <p>Permintaan penggunaan hak dapat disampaikan melalui saluran komunikasi resmi organisasi dan akan ditindaklanjuti sesuai prosedur serta batas waktu yang ditetapkan UU PDP.</p>
+
+          <p class="acc-pasal">Pasal 10 — Penarikan Persetujuan</p>
+          <p>Calon anggota maupun anggota berhak menarik persetujuan pemrosesan data pribadi melalui saluran resmi organisasi sebagaimana diatur dalam Pasal 10 UU PDP. Penarikan persetujuan tidak menghapus keabsahan pemrosesan yang telah dilakukan sebelumnya. Apabila data tertentu diperlukan untuk melanjutkan administrasi keanggotaan, HANRA wajib menjelaskan konsekuensinya secara wajar dan transparan.</p>
+
+          <p class="acc-pasal">Pasal 11 — Penanganan Insiden Keamanan Data</p>
+          <p>Apabila terjadi kegagalan pelindungan data pribadi, HANRA wajib melakukan penanganan, pengamanan, dan pemulihan serta menyampaikan pemberitahuan kepada pihak yang berhak dan lembaga pengawas sesuai persyaratan dan batas waktu yang ditetapkan dalam UU PDP.</p>
+
+          <p class="acc-pasal">Pasal 12 — Perubahan Kebijakan</p>
+          <p>HANRA dapat memperbarui kebijakan ini untuk menyesuaikan perkembangan organisasi, sistem teknologi, dan peraturan perundang-undangan. Perubahan yang memengaruhi informasi pemrosesan data pribadi akan diberitahukan sebelum diberlakukan. Apabila perubahan memerlukan persetujuan baru, HANRA akan memintanya secara terpisah.</p>
+
+          <p class="acc-pasal">Pasal 13 — Ketentuan Penutup</p>
+          <p>Dengan memberikan persetujuan melalui formulir pendaftaran, calon anggota menyatakan telah memperoleh kesempatan untuk membaca dan memahami kebijakan ini. Persetujuan tersebut berlaku untuk tujuan pemrosesan yang telah dijelaskan dan tidak menghilangkan hak calon anggota maupun anggota atas pelindungan data pribadinya sebagaimana dijamin dalam UU PDP.</p>
+
+          <p style="margin-top:14px;font-style:italic;color:#888;font-size:0.78rem;">Kebijakan ini berlaku sejak formulir ini diterbitkan dan akan diperbarui sesuai perkembangan ketentuan hukum yang berlaku.</p>
+
+        </div>
       </div>
-      <div class="error-msg" id="err-persetujuan">Pernyataan persetujuan wajib dicentang.</div>
+
+      <!-- DUA CHECKBOX TERPISAH -->
+      <div style="margin-top:16px;">
+        <div class="checkbox-row">
+          <input type="checkbox" id="persetujuan" required>
+          <label for="persetujuan">Saya telah membaca, memahami, dan menyetujui seluruh ketentuan keanggotaan HANRA.</label>
+        </div>
+        <div class="error-msg" id="err-persetujuan">Pernyataan persetujuan wajib dicentang.</div>
+        <div style="border-top:1px solid #2A2A2A;margin:12px 0;"></div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="persetujuan2" required>
+          <label for="persetujuan2">Saya menyetujui pemrosesan data pribadi sesuai Kebijakan Privasi HANRA.</label>
+        </div>
+        <div class="error-msg" id="err-persetujuan2">Persetujuan data pribadi wajib dicentang.</div>
+      </div>
+
     </div>
 
     <!-- SUBMIT -->
@@ -968,6 +1252,13 @@
       hideError('persetujuan');
     }
 
+    if (!document.getElementById('persetujuan2').checked) {
+      showError('persetujuan2', 'Persetujuan data pribadi wajib dicentang.');
+      valid = false;
+    } else {
+      hideError('persetujuan2');
+    }
+
     return valid;
   }
 
@@ -1060,15 +1351,25 @@
   });
 
   document.getElementById('persetujuan').addEventListener('change', () => hideError('persetujuan'));
+  document.getElementById('persetujuan2').addEventListener('change', () => hideError('persetujuan2'));
 </script>
 
 <script>
-function togglePernyataan() {
-  const detail = document.getElementById('pernyataanDetail');
-  const open = detail.style.display === 'none';
-  detail.style.display = open ? 'block' : 'none';
-  const btns = document.querySelectorAll('.btn-selengkapnya-inline');
-  btns.forEach(b => b.textContent = open ? 'Sembunyikan ▴' : 'Selengkapnya ▾');
+function toggleAccordion(id) {
+  const body = document.getElementById(id);
+  const num = id.replace('acc','');
+  const chev = document.getElementById('chev' + num);
+  const btn = body.previousElementSibling;
+  const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  if (isOpen) {
+    body.style.maxHeight = '0px';
+    chev.classList.remove('open');
+    btn.classList.remove('active');
+  } else {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    chev.classList.add('open');
+    btn.classList.add('active');
+  }
 }
 </script>
 
